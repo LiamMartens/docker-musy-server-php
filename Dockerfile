@@ -37,3 +37,6 @@ RUN mkdir /ffmpeg && cd /ffmpeg && \
 
 RUN curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py && python3 get-pip.py && rm get-pip.py
 RUN pip3 install Pillow
+
+# add rust
+RUN apk add rust cargo
