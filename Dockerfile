@@ -1,11 +1,11 @@
 FROM liammartens/phalcon
 MAINTAINER Liam Martens <hi@liammartens.com>
 
-RUN apk add --update screen nano curl python3 alpine-sdk g++ zlib-dev zlib libjpeg jpeg-dev libpng libpng-dev tiff tiff-dev \
-            freetype freetype-dev lcms lcms-dev libwebp libwebp-dev openjpeg openjpeg-dev python3-dev
+RUN apk add --update screen nano curl alpine-sdk g++ zlib-dev libjpeg jpeg-dev libpng libpng-dev tiff tiff-dev \
+            freetype freetype-dev lcms lcms-dev libwebp libwebp-dev openjpeg openjpeg-dev
 # for building ffmpeg
 RUN apk add --update autoconf automake libass-dev sdl2-dev libtheora-dev libtool libva-dev libvdpau-dev \
-            libvorbis-dev xcb-util-dev texinfo wget zlib yasm nasm x264-dev x265-dev fdk-aac-dev@testing lame-dev rtmpdump-dev \
+            libvorbis-dev xcb-util-dev texinfo wget yasm nasm x264-dev x265-dev lame-dev rtmpdump-dev \
             opus-dev libvpx-dev
 
 RUN mkdir /ffmpeg && cd /ffmpeg && \
@@ -35,8 +35,6 @@ RUN mkdir /ffmpeg && cd /ffmpeg && \
                 --disable-debug && \
     make && make install && cd / && rm -rf /ffmpeg
 
-RUN curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py && python3 get-pip.py && rm get-pip.py
-RUN pip3 install Pillow
-
 # add rust
-RUN apk add rust cargo
+RUN apk add rust cargo xvfb chromium
+#RUN apk add alsa-lib alsa-lib-dbg alsa-utils alsaconf
