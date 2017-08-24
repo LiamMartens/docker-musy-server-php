@@ -36,5 +36,6 @@ RUN mkdir /ffmpeg && cd /ffmpeg && \
     make && make install && cd / && rm -rf /ffmpeg
 
 # add rust
-RUN apk add rust cargo xvfb chromium
-#RUN apk add alsa-lib alsa-lib-dbg alsa-utils alsaconf
+RUN apk add rust cargo xvfb chromium dbus ttf-freefont udev alsa-lib alsa-utils alsaconf && dbus-uuidgen > /var/lib/dbus/machine-id
+# install basic caddy for internal server
+RUN curl https://getcaddy.com | bash -s http.cgi,http.cors
